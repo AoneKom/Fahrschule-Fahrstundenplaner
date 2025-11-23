@@ -1,0 +1,21 @@
+=== 10 funktionale Anforderungen an das Fahrschul-Fahrstundenplanungssystem: ===
+
+1. Registrierung von Fahrschülern mit persönlichen Daten, Fahrkönnen und Kontaktdaten.
+
+2. Erstellung, Bearbeitung und Löschung von Fahrstundenplänen für jeden Fahrlehrer.
+
+3. Buchung von Fahrschülern für verfügbare Termine.
+
+4. Verwaltung des Fahrstundenstatus (geplant, abgeschlossen, storniert).
+
+5. Erfassung der von jedem Fahrschüler geleisteten Arbeitsstunden.
+
+6. Verfolgung des Fahrstundenfortschritts und Anzeige der Fahrstundenhistorie.
+
+7. Verwaltung der Verfügbarkeit der Fahrlehrer (Arbeitstage, -zeiten, Pausen).
+
+8. Benachrichtigungen für Fahrschüler und Fahrlehrer über anstehende Fahrstunden oder Änderungen.
+
+9. Erstellung von Berichten zur Auslastung der Fahrlehrer und zur Aktivität der Fahrschüler.
+
+10. Autorisierung und Rollenverteilung (Administrator, Fahrlehrer).
