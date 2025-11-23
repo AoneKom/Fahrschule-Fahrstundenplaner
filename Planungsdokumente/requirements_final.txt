@@ -1,0 +1,68 @@
+Fahrschule – Fahrstundenplaner
+Finale funktionale Anforderungen und Auswahlbegründung
+
+=== Ausgewählte 5 Kernanforderungen ===
+Nachfolgend sind die fünf wichtigsten funktionalen Anforderungen aus der ursprünglichen Liste ausgewählt. Sie sind für den Betrieb des Systems unerlässlich, da sie die grundlegende Funktionalität für die Unterrichtsplanung und das Lernmanagement bereitstellen.
+
+1. Verwaltung des Stundenplans (Erstellen, Bearbeiten und Löschen von Stunden).
+Begründung: Dies ist die Grundlage des gesamten Systems. Ohne die Möglichkeit, einen Stundenplan zu erstellen, ist die App nutzlos.
+Aufwand: 18 Stunden.
+
+2. Schülerreservierungen.
+Begründung: Eine Kernfunktion ist die Zuweisung von Schülern zu Stunden. Die Verfügbarkeitsprüfung ist daher wichtig.
+Aufwand: 14 Stunden.
+
+3. Verwaltung des Stundenstatus (geplant, abgeschlossen, storniert).
+Begründung: Ein notwendiger Mechanismus zur korrekten Anzeige des Stundenstatus.
+Aufwand: 8 Stunden.
+
+4. Erfassung der Arbeitsstunden der Schüler und Überwachung des Lernfortschritts.
+Begründung: Fahrschulen sind verpflichtet, die Fahrstunden der Fahrschüler für die Prüfungszulassung zu dokumentieren.
+Zeitaufwand: 12 Stunden.
+
+5. Verfügbarkeit der Fahrlehrer verwalten (Arbeitszeiten, Wochenenden, Pausen).
+Begründung: Eine korrekte Unterrichtsplanung ist ohne Informationen zur Verfügbarkeit der Fahrlehrer nicht möglich.
+Zeitaufwand: 10 Stunden.
+
+
+=== Zusammenfassung der funktionalen Anforderungen (mindestens 5) ===
+
+1. Modul „Stundenplan“:
+
+- Erstellen, Bearbeiten und Löschen von Stundenplänen.
+
+- Prüfen von Zeitüberschneidungen.
+
+Aufwand: 18 Stunden.
+
+2. Modul „Teilnehmeranmeldung“:
+
+- Auswählen verfügbarer Zeitfenster.
+
+- Buchen und Stornieren von Anmeldungen.
+
+Aufwand: 14 Stunden.
+
+3. Modul „Stundenstatusverwaltung“:
+
+- Aktualisieren des Stundenstatus (geplant, abgeschlossen, storniert).
+
+Aufwand: 8 Stunden.
+
+4. Modul „Stunden- und Fortschrittsverfolgung“:
+
+- Automatische Berechnung der Stunden basierend auf abgeschlossenen Stunden.
+
+- Anzeigen von Statistiken für jeden Teilnehmer.
+
+Aufwand: 12 Stunden.
+
+5. Modul „Verfügbarkeitsverwaltung für Dozenten“:
+
+- Einrichten von Arbeitszeitplänen.
+
+- Ausschließen nicht verfügbarer Zeitfenster bei der Planung.
+
+Arbeitskosten: 10 Stunden.
+
+Geschätzte Gesamtarbeitskosten: 62 Stunden.
