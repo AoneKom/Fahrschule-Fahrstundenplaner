@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fahrschule - Fahrstundenplaner", "Fahrschule - Fahrstundenplaner\Fahrschule - Fahrstundenplaner.csproj", "{FA7F7DDA-5F85-4589-A8CA-EC4C9D548BF8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{84D27F74-D2BA-6C25-2661-968F101900D9}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Fahrschule-Fahrstundenplaner\Implementierung\db_PROJEKTNAME.sql = ..\..\Fahrschule-Fahrstundenplaner\Implementierung\db_PROJEKTNAME.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA7F7DDA-5F85-4589-A8CA-EC4C9D548BF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA7F7DDA-5F85-4589-A8CA-EC4C9D548BF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA7F7DDA-5F85-4589-A8CA-EC4C9D548BF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA7F7DDA-5F85-4589-A8CA-EC4C9D548BF8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3456FE2B-E2DE-4E61-B7AB-9C5F18692D11}
+	EndGlobalSection
+EndGlobal
