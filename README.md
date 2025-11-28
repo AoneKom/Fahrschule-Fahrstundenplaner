@@ -1,4 +1,4 @@
-<# Fahrschule-Fahrstundenplaner
+# Fahrschule-Fahrstundenplaner
 
 Dieses Projekt implementiert ein Fahrschulsystem zur Planung und Verwaltung von Fahrstunden.
 Es enthält eine vollständige SQL-Datenbankstruktur, ein C#-Konsolenprototyp, ER-Diagramme
