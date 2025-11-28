@@ -1,4 +1,10 @@
---------------------------------------------
+NOT NULL,
+    Phone NVARCHAR(20),
+    TotalHours INT DEFAULT 0
+);
+GO
+
+-- Tabelle der Fahrlehrer--------------------------------------------
 -- 1. Erstellen der Datenbank, falls nicht vorhanden
 --------------------------------------------
 IF DB_ID('DrivingSchoolDB') IS NULL
@@ -25,13 +31,11 @@ GO
 CREATE TABLE Student (
     StudentID INT IDENTITY(1,1) PRIMARY KEY,
     FirstName NVARCHAR(50) NOT NULL,
-    LastName NVARCHAR(50) NOT NULL,
-    Phone NVARCHAR(20),
-    TotalHours INT DEFAULT 0
+    LastName NVARCHAR(50) 
 );
 GO
 
--- Tabelle der Fahrlehrer
+
 CREATE TABLE Instructor (
     InstructorID INT IDENTITY(1,1) PRIMARY KEY,
     FirstName NVARCHAR(50) NOT NULL,
