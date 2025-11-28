@@ -1,9 +1,3 @@
-NOT NULL,
-    Phone NVARCHAR(20),
-    TotalHours INT DEFAULT 0
-);
-GO
-
 -- Tabelle der Fahrlehrer--------------------------------------------
 -- 1. Erstellen der Datenbank, falls nicht vorhanden
 --------------------------------------------
