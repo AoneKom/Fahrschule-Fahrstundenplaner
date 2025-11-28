@@ -1,6 +1,4 @@
--- Tabelle der Fahrlehrer--------------------------------------------
--- 1. Erstellen der Datenbank, falls nicht vorhanden
---------------------------------------------
+-- Datenbank erstellen, falls nicht vorhanden
 IF DB_ID('DrivingSchoolDB') IS NULL
     CREATE DATABASE DrivingSchoolDB;
 GO
@@ -9,7 +7,7 @@ USE DrivingSchoolDB;
 GO
 
 --------------------------------------------
--- 2. Löschen vorhandener Tabellen
+-- 1. Löschen vorhandener Tabellen
 --------------------------------------------
 IF OBJECT_ID('dbo.Booking', 'U') IS NOT NULL DROP TABLE dbo.Booking;
 IF OBJECT_ID('dbo.Lesson', 'U') IS NOT NULL DROP TABLE dbo.Lesson;
@@ -18,27 +16,29 @@ IF OBJECT_ID('dbo.Instructor', 'U') IS NOT NULL DROP TABLE dbo.Instructor;
 GO
 
 --------------------------------------------
--- 3. Erstellen der Tabellen
+-- 2. Tabellen neu erstellen
 --------------------------------------------
 
--- Tabelle der Schüler
+-- Tabelle Student
 CREATE TABLE Student (
     StudentID INT IDENTITY(1,1) PRIMARY KEY,
     FirstName NVARCHAR(50) NOT NULL,
-    LastName NVARCHAR(50) 
+    LastName NVARCHAR(50) NOT NULL,
+    Phone NVARCHAR(20),
+    TotalHours INT DEFAULT 0
 );
 GO
 
-
+-- Tabelle Instructor
 CREATE TABLE Instructor (
     InstructorID INT IDENTITY(1,1) PRIMARY KEY,
     FirstName NVARCHAR(50) NOT NULL,
     LastName NVARCHAR(50) NOT NULL,
-    WorkHours NVARCHAR(100) NULL
+    WorkHours NVARCHAR(100)
 );
 GO
 
--- Tabelle der Fahrstunden
+-- Tabelle Lesson
 CREATE TABLE Lesson (
     LessonID INT IDENTITY(1,1) PRIMARY KEY,
     InstructorID INT NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE Lesson (
 );
 GO
 
--- Tabelle der Buchungen (Student ↔ Lesson)
+-- Tabelle Booking
 CREATE TABLE Booking (
     BookingID INT IDENTITY(1,1) PRIMARY KEY,
     StudentID INT NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE Booking (
 GO
 
 --------------------------------------------
--- 4. Einfügen von Beispieldaten
+-- 3. Beispieldaten einfügen
 --------------------------------------------
 
 -- Schüler
@@ -106,7 +106,7 @@ VALUES
 (5, 5);
 
 --------------------------------------------
--- 5. Beispielabfrage mit JOIN
+-- 4. Beispiel-Join
 --------------------------------------------
 SELECT
     s.FirstName + ' ' + s.LastName AS StudentName,
@@ -120,4 +120,5 @@ JOIN Lesson l ON b.LessonID = l.LessonID
 JOIN Instructor i ON l.InstructorID = i.InstructorID
 ORDER BY l.LessonDate;
 GO
+
 
