@@ -11,4 +11,4 @@ und dokumentierte Berichte über den Einsatz von KI-Tools.
 - Dokumentation, SQL-Skripte und ER-Diagramme  
 
 ## Autor
-**Anastasia Kominch**>
+**Anastasia Kominch**
