@@ -1,0 +1,28 @@
+name: .NET Core Tests
+
+on:
+  push:
+    branches: [ "main", "working-version" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x # Укажи версию .NET, которую ты используешь
+
+    - name: Restore dependencies
+      run: dotnet restore Implementierung/Fahrstundenplaner.sln
+
+    - name: Build
+      run: dotnet build Implementierung/Fahrstundenplaner.sln --no-restore
+
+    - name: Test
+      run: dotnet test Implementierung/Fahrstundenplaner.sln --no-build --verbosity normal
