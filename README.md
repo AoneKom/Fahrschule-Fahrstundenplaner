@@ -12,3 +12,7 @@ und dokumentierte Berichte über den Einsatz von KI-Tools.
 
 ## Autor
 **Anastasia Kominch**
+
+Alle Projektanforderungen wurden erfolgreich umgesetzt.
+
+Close all requirements. Closes #2, #3, #4, #5, #6
