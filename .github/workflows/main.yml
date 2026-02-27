@@ -2,13 +2,11 @@ name: .NET Core Tests
 
 on:
   push:
-    branches: [ "main", "working-version" ]
-  pull_request:
     branches: [ "main" ]
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-latest # Обязательно для WPF
 
     steps:
     - uses: actions/checkout@v3
@@ -16,13 +14,13 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 8.0.x # Укажи версию .NET, которую ты используешь
+        dotnet-version: 8.0.x # Убедись, что это совпадает с твоим проектом!
 
-    - name: Restore dependencies
-      run: dotnet restore Implementierung/Fahrstundenplaner.sln
+    - name: Restore
+      run: dotnet restore
 
     - name: Build
-      run: dotnet build Implementierung/Fahrstundenplaner.sln --no-restore
+      run: dotnet build --no-restore
 
     - name: Test
-      run: dotnet test Implementierung/Fahrstundenplaner.sln --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal
