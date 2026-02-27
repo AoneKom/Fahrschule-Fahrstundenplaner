@@ -42,6 +42,6 @@ Eine vollständige Demonstration der Anwendung finden Sie im folgenden Video:
 
 
 
-![Tests](https://github.com/[User]/[Repo]/actions/workflows/main.yml/badge.svg)
+![Tests](https://github.com/AoneKom/Fahrschule-Fahrstundenplaner/actions/workflows/main.yml/badge.svg)
 
 
