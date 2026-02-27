@@ -1,0 +1,186 @@
+﻿<Window x:Class="Fahrstundenplaner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+        Title="Fahrstundenplaner" 
+        Height="850" Width="1300" 
+        WindowStartupLocation="CenterScreen"
+        Language="de-DE"
+        x:Name="MyWindow">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <SolidColorBrush x:Key="HeaderColor" Color="#2C3E51"/>
+
+        <x:Array x:Key="DayList" Type="sys:String">
+            <sys:String>Sonntag</sys:String>
+            <sys:String>Montag</sys:String>
+            <sys:String>Dienstag</sys:String>
+            <sys:String>Mittwoch</sys:String>
+            <sys:String>Donnerstag</sys:String>
+            <sys:String>Freitag</sys:String>
+            <sys:String>Samstag</sys:String>
+        </x:Array>
+
+        <Style x:Key="PremiumButton" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#F4F7F9">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="{StaticResource HeaderColor}" Padding="20,0">
+            <DockPanel>
+                <TextBlock Text="🚗 Fahrstundenplaner" Foreground="White" FontSize="22" FontWeight="ExtraBold" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Style="{StaticResource PremiumButton}" Content="💾 SPEICHERN" Click="Save_Click" Background="#2980B9" Width="130"/>
+                    <Button Style="{StaticResource PremiumButton}" Content="🖨 PRINT PDF" Click="Print_Click" Background="#34495E" Width="130"/>
+                    <Button Style="{StaticResource PremiumButton}" Content="+ NEU" Click="AddNew_Click" Background="#27AE60" Width="90"/>
+                    <Button Style="{StaticResource PremiumButton}" Content="🗑 LÖSCHEN" Click="Delete_Click" Background="#E74C3C"/>
+                    <Rectangle Width="1" Fill="White" Height="30" Margin="15,0" Opacity="0.3"/>
+                    <Button Style="{StaticResource PremiumButton}" Content="📋 LOGS" Click="OpenLog_Click" Background="#E67E22" 
+                            Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVis}}"/>
+                    <Button Style="{StaticResource PremiumButton}" Content="👥 NUTZER" Click="OpenUserManagement_Click" Background="#16A085" 
+                            Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVis}}"/>
+                    <Button Style="{StaticResource PremiumButton}" Content="🚪 LOGOUT" Click="Logout_Click" Background="#95A5A6"/>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <TabControl Grid.Row="1" Margin="10" Background="Transparent" BorderThickness="0">
+            <TabItem Header="Fahrstunden">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="340"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel>
+                        <Border Background="White" CornerRadius="12" Padding="20" Margin="0,0,0,20">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="15" Opacity="0.1"/>
+                            </Border.Effect>
+                            <StackPanel>
+                                <TextBlock Text="AUTO-PLANER" FontWeight="Bold" Margin="0,0,0,15" Foreground="#2C3E50"/>
+                                <TextBox x:Name="AtName" Text="Schülername..." Foreground="Gray" Height="35" Margin="0,5" VerticalContentAlignment="Center" GotFocus="Placeholder_GotFocus"/>
+
+                                <ComboBox x:Name="AtLehrer" ItemsSource="{Binding AvailableLehrer}" SelectedIndex="0" Height="35" Margin="0,5" VerticalContentAlignment="Center"/>
+
+                                <ComboBox x:Name="AtType" ItemsSource="{Binding AvailableTypes}" SelectedIndex="0" Height="35" Margin="0,5"/>
+                                <ComboBox x:Name="AtDay" ItemsSource="{StaticResource DayList}" SelectedIndex="1" Height="35" Margin="0,5"/>
+
+                                <UniformGrid Columns="2">
+                                    <TextBox x:Name="AtTime" Text="14:00" Height="35" Margin="0,5,2,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="Placeholder_GotFocus"/>
+                                    <TextBox x:Name="AtCount" Text="10" Height="35" Margin="2,5,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="Placeholder_GotFocus"/>
+                                </UniformGrid>
+                                <Button Content="GENERIEREN" Click="AutoGenerate_Click" Style="{StaticResource PremiumButton}" Background="#8E44AD" Height="40" Margin="0,15,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <Border Grid.Column="1" Background="White" CornerRadius="12" Padding="15" Margin="20,0,0,0">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,15">
+                                <TextBlock Text="🔍 Suche:" VerticalAlignment="Center" Margin="0,0,10,0" Foreground="#2C3E50" FontWeight="Bold"/>
+                                <TextBox Width="250" Height="30" VerticalContentAlignment="Center" 
+                                         Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
+
+                                <CheckBox Content="Nur Unbezahlt" IsChecked="{Binding ShowOnlyUnpaid}" 
+                                          VerticalAlignment="Center" Margin="25,0,0,0" Foreground="#E74C3C" FontWeight="Bold"/>
+                            </StackPanel>
+
+
+                            <DataGrid x:Name="MainGrid" 
+                                      ItemsSource="{Binding FahrstundenView}" 
+                                      AutoGenerateColumns="False" 
+                                      CanUserAddRows="False" 
+                                      BorderThickness="0" 
+                                      Background="Transparent" 
+                                      RowHeight="45"
+                                      GridLinesVisibility="Horizontal"
+                                      HorizontalGridLinesBrush="#F0F0F0">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="DATUM" Binding="{Binding Startzeit}" Width="150"/>
+                                    <DataGridTextColumn Header="SCHÜLER" Binding="{Binding StudentName}" Width="*"/>
+
+                                    <DataGridComboBoxColumn Header="LEHRER" Width="150" 
+                                                            SelectedItemBinding="{Binding LehrerName, UpdateSourceTrigger=PropertyChanged}">
+                                        <DataGridComboBoxColumn.ElementStyle>
+                                            <Style TargetType="ComboBox">
+                                                <Setter Property="ItemsSource" Value="{Binding DataContext.AvailableLehrer, ElementName=MyWindow}"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridComboBoxColumn.ElementStyle>
+                                        <DataGridComboBoxColumn.EditingElementStyle>
+                                            <Style TargetType="ComboBox">
+                                                <Setter Property="ItemsSource" Value="{Binding DataContext.AvailableLehrer, ElementName=MyWindow}"/>
+                                            </Style>
+                                        </DataGridComboBoxColumn.EditingElementStyle>
+                                    </DataGridComboBoxColumn>
+
+                                    <DataGridComboBoxColumn Header="TYP" Width="140" 
+                                                            SelectedValueBinding="{Binding LessonType, UpdateSourceTrigger=PropertyChanged}">
+                                        <DataGridComboBoxColumn.ElementStyle>
+                                            <Style TargetType="ComboBox">
+                                                <Setter Property="ItemsSource" Value="{Binding DataContext.AvailableTypes, ElementName=MyWindow}"/>
+                                            </Style>
+                                        </DataGridComboBoxColumn.ElementStyle>
+                                        <DataGridComboBoxColumn.EditingElementStyle>
+                                            <Style TargetType="ComboBox">
+                                                <Setter Property="ItemsSource" Value="{Binding DataContext.AvailableTypes, ElementName=MyWindow}"/>
+                                            </Style>
+                                        </DataGridComboBoxColumn.EditingElementStyle>
+                                    </DataGridComboBoxColumn>
+                                    
+
+                                    <DataGridCheckBoxColumn Header="BEZAHLT" Binding="{Binding Bezahlt, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+
+                                    <DataGridTextColumn Header="PREIS" Binding="{Binding Preis, StringFormat={}{0:N2} €}" IsReadOnly="True" Width="100" FontWeight="Bold">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                                <Setter Property="Margin" Value="0,0,10,0" />
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            
+                        </DockPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Kalender">
+                <Viewbox Stretch="Uniform" Margin="20">
+                    <Calendar FirstDayOfWeek="Monday" x:Name="MainCalendar"/>
+                </Viewbox>
+            </TabItem>
+        </TabControl>
+
+        <Border Grid.Row="2" Background="White" BorderBrush="#EEE" BorderThickness="0,1,0,0" Padding="30,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock Text="STATUS:" Foreground="#7F8C8D" FontWeight="Bold" Margin="0,0,15,0" VerticalAlignment="Center"/>
+                <TextBlock Text="System bereit" Foreground="#27AE60" FontSize="18" FontWeight="ExtraBold" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
